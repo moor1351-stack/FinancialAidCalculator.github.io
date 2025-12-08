@@ -5,10 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>College Cost & Aid Estimator</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; background: #f9f9f9; }
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    h1 { text-align: center; }
     label { display: block; margin-top: 15px; }
     input, select { width: 100%; padding: 8px; margin-top: 5px; }
-    button { margin-top: 20px; padding: 12px; width: 100%; background: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 16px; }
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover { background: #45a049; }
     .result { margin-top: 25px; background: #e8f5e9; padding: 15px; border-radius: 6px; }
   </style>
 </head>
@@ -17,15 +37,16 @@
 
   <label for="schoolType">Type of School:</label>
   <select id="schoolType">
-    <option value="public">Public — In‑State 4‑Year</option>
-    <option value="private">Private Nonprofit 4‑Year</option>
-    <option value="public2yr">Public 2‑Year / Community College</option>
+    <option value="public">Public — In-State 4-Year</option>
+    <option value="publicOut">Public — Out-of-State 4-Year</option>
+    <option value="private">Private Nonprofit 4-Year</option>
+    <option value="public2yr">Public 2-Year / Community College</option>
   </select>
 
-  <label for="livingExpenses">Estimated Living & Other Expenses (per year $):</label>
+  <label for="livingExpenses">Estimated Living & Other Expenses ($/year):</label>
   <input type="number" id="livingExpenses" placeholder="e.g., 12000">
 
-  <label for="familyIncome">Household Income (pre-tax $):</label>
+  <label for="familyIncome">Household Income ($/year):</label>
   <input type="number" id="familyIncome" placeholder="e.g., 50000">
 
   <label for="householdSize">Total Household Members:</label>
@@ -39,34 +60,34 @@
 function estimateCost() {
   const school = document.getElementById('schoolType').value;
   let tuition;
-  if (school === 'public') tuition = 11950;
-  else if (school === 'private') tuition = 45000;
-  else tuition = 4150;
+  if (school === 'public') tuition = 11950;       // in-state average
+  else if (school === 'publicOut') tuition = 29500; // out-of-state average
+  else if (school === 'private') tuition = 45000;  // private nonprofit
+  else tuition = 4150;                             // community college
 
   const expenses = Number(document.getElementById('livingExpenses').value);
   const income = Number(document.getElementById('familyIncome').value);
   const size = Number(document.getElementById('householdSize').value);
 
-  // Rough grant/aid baseline (average values)
-  const avgGrant = 12080;  // average grants per student per year :contentReference[oaicite:6]{index=6}
-  const avgLoan = 3790;
+  // Realistic average grant & loan data
+  const avgGrant = 12080;  // typical grant aid per student
+  const avgLoan = 3790;    // typical federal loan
 
-  const cost = tuition + expenses;
-  const netAfterAvgAid = cost - avgGrant;
+  const totalEstimatedCost = tuition + expenses;
 
-  // Fake “need estimated” — simple adjustment based on income & household size
+  // Simple "need factor" based on income & household size
   const incomeThreshold = 60000 + (size - 2) * 5000;
   const needFactor = Math.max(0, (incomeThreshold - income) / incomeThreshold);
   const additionalAid = Math.round(needFactor * avgGrant * 0.5);
 
-  const estimatedOutOfPocket = Math.max(0, cost - (avgGrant + additionalAid));
+  const estimatedOutOfPocket = Math.max(0, totalEstimatedCost - (avgGrant + additionalAid));
 
   document.getElementById('result').innerHTML = `
-    <p><strong>Estimated total cost (tuition + expenses):</strong> $${cost.toLocaleString()}</p>
+    <p><strong>Estimated total cost (tuition + expenses):</strong> $${totalEstimatedCost.toLocaleString()}</p>
     <p><strong>Typical grant aid (avg):</strong> $${avgGrant.toLocaleString()}</p>
-    <p><strong>Estimated additional need‑based aid:</strong> $${additionalAid.toLocaleString()}</p>
+    <p><strong>Estimated additional need-based aid:</strong> $${additionalAid.toLocaleString()}</p>
     <p><strong>Estimated out-of-pocket cost after aid:</strong> $${estimatedOutOfPocket.toLocaleString()}</p>
-    <p><em>(Note: This is a rough estimate — actual aid depends on full financial profile)</em></p>
+    <p><em>(Note: This is a rough estimate based on averages — actual aid depends on full financial profile)</em></p>
   `;
 }
 </script>
