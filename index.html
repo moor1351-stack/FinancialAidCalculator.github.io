@@ -60,8 +60,8 @@
 function estimateCost() {
   const school = document.getElementById('schoolType').value;
   let tuition;
-  if (school === 'public') tuition = 11950;       // in-state average
-  else if (school === 'publicOut') tuition = 29500; // out-of-state average
+  if (school === 'public') tuition = 11950;       // in-state
+  else if (school === 'publicOut') tuition = 29500; // out-of-state
   else if (school === 'private') tuition = 45000;  // private nonprofit
   else tuition = 4150;                             // community college
 
@@ -69,8 +69,8 @@ function estimateCost() {
   const income = Number(document.getElementById('familyIncome').value);
   const size = Number(document.getElementById('householdSize').value);
 
-  // Realistic average grant & loan data
-  const avgGrant = 12080;  // typical grant aid per student
+  // Average grant and loan data
+  const avgGrant = 12080;  // average grants per student per year
   const avgLoan = 3790;    // typical federal loan
 
   const totalEstimatedCost = tuition + expenses;
