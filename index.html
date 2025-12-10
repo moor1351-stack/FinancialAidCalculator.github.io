@@ -13,7 +13,7 @@
 
   body {
     font-family: Arial, sans-serif;
-    min-height: 160vh; /* enough to scroll to bottom of image */
+    min-height: 100vh;
     background: white;
     position: relative;
   }
@@ -25,10 +25,12 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 160%; 
-    background: linear-gradient(to bottom, white 0%, rgba(255,255,255,0) 30%), 
+    height: 100%;
+    background: linear-gradient(to bottom, white 0%, rgba(255,255,255,0) 25%), 
                 url("unnamed.jpg") no-repeat bottom center;
-    background-size: cover;
+    background-size: contain; /* ensures full image visible without cropping */
+    background-position: bottom;
+    background-repeat: no-repeat;
     z-index: -1;
   }
 
@@ -44,7 +46,7 @@
 
   /* Common card style */
   .card, .text-card {
-    background: rgba(249,249,249,0.9); /* slightly transparent so image is visible */
+    background: rgba(249,249,249,0.9);
     border-radius: 10px;
     padding: 25px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.2);
@@ -94,7 +96,7 @@
 
   .result {
     margin-top: 25px;
-    background: rgba(65,105,225,0.3); /* blue transparent */
+    background: rgba(65,105,225,0.3);
     padding: 15px;
     border-radius: 6px;
   }
@@ -102,8 +104,13 @@
   /* Text Card */
   .text-card {
     width: 400px;
-    font-family: 'Georgia', 'Palatino', serif; /* less extreme cursive, more readable */
+    font-family: 'Georgia', 'Palatino', serif;
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centers text vertically in box */
+    min-height: 400px; /* ensures the card is tall enough for quote to sit lower */
+    padding: 40px 25px; /* more top padding to push text lower */
   }
 
   .text-card p {
@@ -117,6 +124,8 @@
     }
     .card, .text-card {
       width: 90%;
+      min-height: auto;
+      padding: 25px;
     }
   }
 </style>
