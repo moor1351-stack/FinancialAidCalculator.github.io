@@ -13,8 +13,8 @@
 
   body {
     font-family: Arial, sans-serif;
+    min-height: 160vh; /* enough to scroll to bottom of image */
     background: white;
-    min-height: 150vh; /* allows scroll to bottom of image */
     position: relative;
   }
 
@@ -25,14 +25,13 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 150%; 
-    background: linear-gradient(to bottom, white 0%, rgba(255,255,255,0) 25%), 
+    height: 160%; 
+    background: linear-gradient(to bottom, white 0%, rgba(255,255,255,0) 30%), 
                 url("unnamed.jpg") no-repeat bottom center;
     background-size: cover;
     z-index: -1;
   }
 
-  /* Container for cards */
   .container {
     display: flex;
     flex-wrap: wrap;
@@ -40,15 +39,15 @@
     gap: 30px;
     max-width: 1200px;
     width: 90%;
-    margin: 60px auto; /* pushes content below top fade */
+    margin: 60px auto;
   }
 
-  /* Common Card Styles */
+  /* Common card style */
   .card, .text-card {
-    background: rgba(249,249,249,0.95); /* slightly transparent so image is visible behind */
+    background: rgba(249,249,249,0.9); /* slightly transparent so image is visible */
     border-radius: 10px;
     padding: 25px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2); /* raised effect */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
     flex-shrink: 0;
   }
 
@@ -103,7 +102,7 @@
   /* Text Card */
   .text-card {
     width: 400px;
-    font-family: 'Lucida Handwriting', 'Brush Script MT', cursive;
+    font-family: 'Georgia', 'Palatino', serif; /* less extreme cursive, more readable */
     line-height: 1.6;
   }
 
@@ -111,7 +110,6 @@
     margin-bottom: 15px;
   }
 
-  /* Responsive */
   @media (max-width: 1000px) {
     .container {
       flex-direction: column;
