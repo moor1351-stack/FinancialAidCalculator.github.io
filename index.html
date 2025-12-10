@@ -5,84 +5,126 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>College Cost & Aid Estimator</title>
   <style>
-    html {
-  background-image: url(unnamed.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* optional */
-}
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.85); /* transparent white */
-      border-radius: 10px;
-      box-shadow: 0 0 10px #ccc;
     }
-    h1 { text-align: center; }
-    label { display: block; margin-top: 15px; }
-    input, select { width: 100%; padding: 8px; margin-top: 5px; }
+
+    /* Top gradient section with your form */
+    .gradient-section {
+      height: 100vh; /* full screen */
+      background: linear-gradient(135deg, #4a90e2, #87cefa); /* royal/light blue gradient */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    /* Form elements */
+    label {
+      color: white;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 300px;
+      padding: 8px;
+      margin: 10px auto;
+      border: 2px solid #4a90e2; /* royal blue border */
+      border-radius: 5px;
+    }
+
     button {
-      margin-top: 20px;
       padding: 12px;
-      width: 100%;
-      background: #4CAF50;
+      width: 300px;
+      background: #4169e1; /* royal blue */
       color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
       font-size: 16px;
       cursor: pointer;
+      transition: background 0.3s;
     }
-    button:hover { background: #45a049; }
-    .result { margin-top: 25px; background: #e8f5e9; padding: 15px; border-radius: 6px; }
+
+    button:hover {
+      background: #1e3bb8; /* darker royal blue on hover */
+    }
+
+    .result {
+      margin-top: 25px;
+      background: rgba(255,255,255,0.85);
+      padding: 15px;
+      border-radius: 6px;
+      border-left: 5px solid #4169e1; /* royal blue accent */
+      max-width: 320px;
+      text-align: center;
+    }
+
+    /* Image section below the form */
+    .image-section {
+      height: 100vh; /* full screen */
+      background-image: url("unnamed.jpg"); /* your image file */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   </style>
 </head>
 <body>
-  <h1>College Cost & Aid Estimator</h1>
+  <!-- Gradient + form section -->
+  <section class="gradient-section">
+    <h1>College Cost & Aid Estimator</h1>
 
-  <label for="schoolType">Type of School:</label>
-  <select id="schoolType">
-    <option value="public">Public — In-State 4-Year</option>
-    <option value="publicOut">Public — Out-of-State 4-Year</option>
-    <option value="private">Private Nonprofit 4-Year</option>
-    <option value="public2yr">Public 2-Year / Community College</option>
-  </select>
+    <label for="schoolType">Type of School:</label>
+    <select id="schoolType">
+      <option value="public">Public — In-State 4-Year</option>
+      <option value="publicOut">Public — Out-of-State 4-Year</option>
+      <option value="private">Private Nonprofit 4-Year</option>
+      <option value="public2yr">Public 2-Year / Community College</option>
+    </select>
 
-  <label for="livingExpenses">Estimated Living & Other Expenses ($/year):</label>
-  <input type="number" id="livingExpenses" placeholder="e.g., 12000">
+    <label for="livingExpenses">Estimated Living & Other Expenses ($/year):</label>
+    <input type="number" id="livingExpenses" placeholder="e.g., 12000">
 
-  <label for="familyIncome">Household Income ($/year):</label>
-  <input type="number" id="familyIncome" placeholder="e.g., 50000">
+    <label for="familyIncome">Household Income ($/year):</label>
+    <input type="number" id="familyIncome" placeholder="e.g., 50000">
 
-  <label for="householdSize">Total Household Members:</label>
-  <input type="number" id="householdSize" placeholder="e.g., 4">
+    <label for="householdSize">Total Household Members:</label>
+    <input type="number" id="householdSize" placeholder="e.g., 4">
 
-  <button onclick="estimateCost()">Estimate Costs & Aid</button>
+    <button onclick="estimateCost()">Estimate Costs & Aid</button>
 
-  <div class="result" id="result"></div>
+    <div class="result" id="result"></div>
+  </section>
+
+  <!-- Image section below -->
+  <section class="image-section"></section>
 
 <script>
 function estimateCost() {
   const school = document.getElementById('schoolType').value;
   let tuition;
-  if (school === 'public') tuition = 11950;       // in-state
-  else if (school === 'publicOut') tuition = 29500; // out-of-state
-  else if (school === 'private') tuition = 45000;  // private nonprofit
-  else tuition = 4150;                             // community college
+  if (school === 'public') tuition = 11950;
+  else if (school === 'publicOut') tuition = 29500;
+  else if (school === 'private') tuition = 45000;
+  else tuition = 4150;
 
   const expenses = Number(document.getElementById('livingExpenses').value);
   const income = Number(document.getElementById('familyIncome').value);
   const size = Number(document.getElementById('householdSize').value);
 
-  // Average grant and loan data
-  const avgGrant = 12080;  // average grants per student per year
-  const avgLoan = 3790;    // typical federal loan
+  const avgGrant = 12080;
+  const avgLoan = 3790;
 
   const totalEstimatedCost = tuition + expenses;
 
-  // Simple "need factor" based on income & household size
   const incomeThreshold = 60000 + (size - 2) * 5000;
   const needFactor = Math.max(0, (incomeThreshold - income) / incomeThreshold);
   const additionalAid = Math.round(needFactor * avgGrant * 0.5);
