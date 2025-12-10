@@ -7,8 +7,9 @@
   <style>
     /* Full-page background image */
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
       background-image: url("unnamed.jpg"); /* your background image */
       background-size: cover;
       background-position: center;
@@ -16,29 +17,23 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh; /* fill viewport */
+      min-height: 100vh;
     }
 
     /* Raised card box */
-    .card {
-      background: rgba(255, 255, 255, 0.85); /* semi-transparent white */
-      padding: 25px;
+    body > div {
+      max-width: 600px;
+      width: 90%;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f9f9f9;
       border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* raised look */
-      max-width: 500px;
-      width: 100%;
+      box-shadow: 0 0 10px #ccc;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+    h1 { text-align: center; }
 
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-    }
+    label { display: block; margin-top: 15px; }
 
     input, select {
       width: 100%;
@@ -52,7 +47,7 @@
       margin-top: 20px;
       padding: 12px;
       width: 100%;
-      background: #4169e1; /* royal blue */
+      background: #4169e1; /* royal blue button */
       color: white;
       border: none;
       border-radius: 4px;
@@ -62,19 +57,19 @@
     }
 
     button:hover {
-      background: #1e3bb8; /* darker royal blue on hover */
+      background: #1e3bb8;
     }
 
     .result {
       margin-top: 25px;
-      background: rgba(65, 105, 225, 0.3); /* blue transparent */
+      background: rgba(65, 105, 225, 0.3); /* blue transparent result box */
       padding: 15px;
       border-radius: 6px;
     }
   </style>
 </head>
 <body>
-  <div class="card">
+  <div>
     <h1>College Cost & Aid Estimator</h1>
 
     <label for="schoolType">Type of School:</label>
@@ -103,20 +98,21 @@
 function estimateCost() {
   const school = document.getElementById('schoolType').value;
   let tuition;
-  if (school === 'public') tuition = 11950;
-  else if (school === 'publicOut') tuition = 29500;
-  else if (school === 'private') tuition = 45000;
-  else tuition = 4150;
+  if (school === 'public') tuition = 11950;       // in-state
+  else if (school === 'publicOut') tuition = 29500; // out-of-state
+  else if (school === 'private') tuition = 45000;  // private nonprofit
+  else tuition = 4150;                             // community college
 
   const expenses = Number(document.getElementById('livingExpenses').value);
   const income = Number(document.getElementById('familyIncome').value);
   const size = Number(document.getElementById('householdSize').value);
 
+  // Average grant data
   const avgGrant = 12080;
-  const avgLoan = 3790;
 
   const totalEstimatedCost = tuition + expenses;
 
+  // Simple "need factor"
   const incomeThreshold = 60000 + (size - 2) * 5000;
   const needFactor = Math.max(0, (incomeThreshold - income) / incomeThreshold);
   const additionalAid = Math.round(needFactor * avgGrant * 0.5);
