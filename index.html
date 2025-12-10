@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>College Cost & Aid Estimator</title>
 <style>
+  /* Reset default */
   * {
     margin: 0;
     padding: 0;
@@ -14,12 +15,11 @@
   body {
     font-family: Arial, sans-serif;
     min-height: 100vh;
+    background: white; /* top fade white */
+    position: relative;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    padding-top: 40px;
-    background: white; /* top plain white */
-    position: relative;
+    padding: 40px 20px;
   }
 
   /* Background image with top fade */
@@ -29,20 +29,21 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 150%; /* allows scroll to bottom of image */
     background: linear-gradient(to bottom, white 0%, rgba(255,255,255,0) 30%), 
                 url("unnamed.jpg") no-repeat bottom center;
     background-size: cover;
-    z-index: -1; /* behind all content */
+    z-index: -1; /* behind content */
   }
 
   .container {
     display: flex;
+    flex-wrap: wrap; /* allow stacking on small screens */
     justify-content: center;
     align-items: flex-start;
     gap: 30px;
     max-width: 1200px;
-    width: 90%;
+    width: 100%;
   }
 
   /* Calculator Card */
@@ -98,13 +99,27 @@
     border-radius: 6px;
   }
 
-  .info-text {
+  /* Text card */
+  .text-card {
+    background: #f9f9f9;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
     max-width: 500px;
+    font-family: 'Lucida Handwriting', 'Brush Script MT', cursive; /* cursive quote style */
     line-height: 1.6;
+    flex-shrink: 0;
   }
 
-  .info-text p {
+  .text-card p {
     margin-bottom: 15px;
+  }
+
+  @media (max-width: 1050px) {
+    .container {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 </style>
 </head>
@@ -137,8 +152,8 @@
     <div class="result" id="result"></div>
   </div>
 
-  <!-- Text next to calculator -->
-  <div class="info-text">
+  <!-- Text Card -->
+  <div class="text-card">
     <p>My name is Ralph Moore-deOliveira, I made this financial aid calculator in order to help those who are wondering how much financial aid they could earn, and how much they would have to pay out of pocket to attend college. As we high school students move toward the rest of our lives we must remember what is important to us, and take actions to become better.</p>
     <p>“Surround yourself with only people who are going to lift you higher.” — Oprah Winfrey</p>
   </div>
