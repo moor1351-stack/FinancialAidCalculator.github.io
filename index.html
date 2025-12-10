@@ -13,12 +13,12 @@
 
   body {
     font-family: Arial, sans-serif;
-    min-height: 100vh;
+    min-height: 110vh; /* enough to scroll a little */
     background: white;
     position: relative;
   }
 
-  /* Full-screen background image with top fade */
+  /* Background image with top fade */
   body::before {
     content: "";
     position: fixed;
@@ -26,10 +26,17 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(to bottom, white 0%, rgba(255,255,255,0) 25%), 
+    background: linear-gradient(to bottom, white 0%, rgba(255,255,255,0) 15%), 
                 url("unnamed.jpg") no-repeat bottom center;
-    background-size: cover; 
+    background-size: cover;
+    background-position: bottom;
     z-index: -1;
+  }
+
+  /* Small spacer at top to make the scroll reveal subtle */
+  .top-spacer {
+    height: 3in; /* 3 inches of white before image shows */
+    width: 100%;
   }
 
   .container {
@@ -38,7 +45,7 @@
     justify-content: center;
     gap: 30px;
     width: 100%;
-    padding: 60px 40px;
+    padding: 20px 40px;
     margin: 0 auto;
   }
 
@@ -106,13 +113,13 @@
     flex-direction: column;
     justify-content: center;
     min-height: 400px;
-    padding: 60px 25px 25px 25px; 
+    padding: 60px 25px 25px 25px;
   }
 
   /* Adjust line spacing for fuller look */
   .text-card p {
     margin-bottom: 15px;
-    line-height: 1.8; /* slightly increased for fuller look */
+    line-height: 1.8;
   }
 
   @media (max-width: 1000px) {
@@ -130,6 +137,9 @@
 </style>
 </head>
 <body>
+
+<!-- Top white spacer -->
+<div class="top-spacer"></div>
 
 <div class="container">
   <!-- Calculator Card -->
