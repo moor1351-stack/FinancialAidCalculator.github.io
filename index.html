@@ -5,81 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>College Cost & Aid Estimator</title>
   <style>
+    /* Full-page background image */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      background-image: url("unnamed.jpg"); /* your background image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* fill viewport */
     }
 
-    /* Top gradient section with your form */
-    .gradient-section {
-      height: 100vh;
-      background: linear-gradient(135deg, #4a90e2, #87cefa); /* royal/light blue gradient */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+    /* Raised card box */
+    .card {
+      background: rgba(255, 255, 255, 0.85); /* semi-transparent white */
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* raised look */
+      max-width: 500px;
+      width: 100%;
     }
 
     h1 {
       text-align: center;
-      color: white;
       margin-bottom: 20px;
     }
 
-    /* Form elements */
     label {
-      color: white;
+      display: block;
+      margin-top: 15px;
       font-weight: bold;
     }
 
     input, select {
-      width: 300px;
+      width: 100%;
       padding: 8px;
-      margin: 10px auto;
-      border: 2px solid #4a90e2; /* royal blue border */
-      border-radius: 5px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
     }
 
     button {
+      margin-top: 20px;
       padding: 12px;
-      width: 300px;
+      width: 100%;
       background: #4169e1; /* royal blue */
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 4px;
       font-size: 16px;
       cursor: pointer;
       transition: background 0.3s;
     }
 
     button:hover {
-      background: #1e3bb8; /* darker royal blue */
+      background: #1e3bb8; /* darker royal blue on hover */
     }
 
     .result {
       margin-top: 25px;
-      background: rgba(255,255,255,0.85);
+      background: rgba(65, 105, 225, 0.3); /* blue transparent */
       padding: 15px;
       border-radius: 6px;
-      border-left: 5px solid #4169e1; /* royal blue accent */
-      max-width: 320px;
-      text-align: center;
-    }
-
-    /* Image section below the form */
-    .image-section {
-      height: 100vh; /* full screen */
-      background-image: url("unnamed.jpg"); /* your uploaded image file */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
     }
   </style>
 </head>
 <body>
-  <!-- Gradient + form section -->
-  <section class="gradient-section">
+  <div class="card">
     <h1>College Cost & Aid Estimator</h1>
 
     <label for="schoolType">Type of School:</label>
@@ -102,10 +97,7 @@
     <button onclick="estimateCost()">Estimate Costs & Aid</button>
 
     <div class="result" id="result"></div>
-  </section>
-
-  <!-- Image section below -->
-  <section class="image-section"></section>
+  </div>
 
 <script>
 function estimateCost() {
