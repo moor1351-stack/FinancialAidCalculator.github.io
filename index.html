@@ -1,75 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>College Cost & Aid Estimator</title>
-  <style>
-    /* Full-page background image */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-image: url("unnamed.jpg"); /* your background image */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Cost & Aid Estimator</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-image: url("unnamed.jpg"); /* your background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
 
-    /* Raised card box */
-    body > div {
-      max-width: 600px;
-      width: 90%;
-      margin: 40px auto;
-      padding: 20px;
-      background: #f9f9f9;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #ccc;
-    }
+  /* The card exactly like your first code */
+  .card {
+    background: #f9f9f9;
+    max-width: 600px;
+    width: 90%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+  }
 
-    h1 { text-align: center; }
+  h1 {
+    text-align: center;
+  }
 
-    label { display: block; margin-top: 15px; }
+  label {
+    display: block;
+    margin-top: 15px;
+  }
 
-    input, select {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
+  input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
 
-    button {
-      margin-top: 20px;
-      padding: 12px;
-      width: 100%;
-      background: #4169e1; /* royal blue button */
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+  /* Blue button instead of green */
+  button {
+    margin-top: 20px;
+    padding: 12px;
+    width: 100%;
+    background: #4169e1; /* royal blue */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
 
-    button:hover {
-      background: #1e3bb8;
-    }
+  button:hover {
+    background: #1e3bb8;
+  }
 
-    .result {
-      margin-top: 25px;
-      background: rgba(65, 105, 225, 0.3); /* blue transparent result box */
-      padding: 15px;
-      border-radius: 6px;
-    }
-  </style>
+  /* Blue transparent result box instead of green */
+  .result {
+    margin-top: 25px;
+    background: rgba(65,105,225,0.3); /* blue transparent */
+    padding: 15px;
+    border-radius: 6px;
+  }
+</style>
 </head>
 <body>
-  <div>
+  <div class="card">
     <h1>College Cost & Aid Estimator</h1>
 
     <label for="schoolType">Type of School:</label>
@@ -98,21 +102,19 @@
 function estimateCost() {
   const school = document.getElementById('schoolType').value;
   let tuition;
-  if (school === 'public') tuition = 11950;       // in-state
-  else if (school === 'publicOut') tuition = 29500; // out-of-state
-  else if (school === 'private') tuition = 45000;  // private nonprofit
-  else tuition = 4150;                             // community college
+  if (school === 'public') tuition = 11950;
+  else if (school === 'publicOut') tuition = 29500;
+  else if (school === 'private') tuition = 45000;
+  else tuition = 4150;
 
   const expenses = Number(document.getElementById('livingExpenses').value);
   const income = Number(document.getElementById('familyIncome').value);
   const size = Number(document.getElementById('householdSize').value);
 
-  // Average grant data
   const avgGrant = 12080;
 
   const totalEstimatedCost = tuition + expenses;
 
-  // Simple "need factor"
   const incomeThreshold = 60000 + (size - 2) * 5000;
   const needFactor = Math.max(0, (incomeThreshold - income) / incomeThreshold);
   const additionalAid = Math.round(needFactor * avgGrant * 0.5);
