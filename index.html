@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>College Cost & Aid Estimator</title>
 <style>
-  /* Reset default */
   * {
     margin: 0;
     padding: 0;
@@ -14,12 +13,9 @@
 
   body {
     font-family: Arial, sans-serif;
-    min-height: 100vh;
-    background: white; /* top fade white */
+    background: white;
+    min-height: 150vh; /* allows scroll to bottom of image */
     position: relative;
-    display: flex;
-    justify-content: center;
-    padding: 40px 20px;
   }
 
   /* Background image with top fade */
@@ -29,31 +25,36 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 150%; /* allows scroll to bottom of image */
-    background: linear-gradient(to bottom, white 0%, rgba(255,255,255,0) 30%), 
+    height: 150%; 
+    background: linear-gradient(to bottom, white 0%, rgba(255,255,255,0) 25%), 
                 url("unnamed.jpg") no-repeat bottom center;
     background-size: cover;
-    z-index: -1; /* behind content */
+    z-index: -1;
   }
 
+  /* Container for cards */
   .container {
     display: flex;
-    flex-wrap: wrap; /* allow stacking on small screens */
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: flex-start;
     gap: 30px;
     max-width: 1200px;
-    width: 100%;
+    width: 90%;
+    margin: 60px auto; /* pushes content below top fade */
   }
 
-  /* Calculator Card */
-  .card {
-    background: #f9f9f9;
-    width: 500px;
-    padding: 25px;
+  /* Common Card Styles */
+  .card, .text-card {
+    background: rgba(249,249,249,0.95); /* slightly transparent so image is visible behind */
     border-radius: 10px;
-    box-shadow: 0 0 10px #ccc;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2); /* raised effect */
     flex-shrink: 0;
+  }
+
+  /* Calculator card */
+  .card {
+    width: 450px;
   }
 
   h1 {
@@ -99,26 +100,25 @@
     border-radius: 6px;
   }
 
-  /* Text card */
+  /* Text Card */
   .text-card {
-    background: #f9f9f9;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #ccc;
-    max-width: 500px;
-    font-family: 'Lucida Handwriting', 'Brush Script MT', cursive; /* cursive quote style */
+    width: 400px;
+    font-family: 'Lucida Handwriting', 'Brush Script MT', cursive;
     line-height: 1.6;
-    flex-shrink: 0;
   }
 
   .text-card p {
     margin-bottom: 15px;
   }
 
-  @media (max-width: 1050px) {
+  /* Responsive */
+  @media (max-width: 1000px) {
     .container {
       flex-direction: column;
       align-items: center;
+    }
+    .card, .text-card {
+      width: 90%;
     }
   }
 </style>
